@@ -1,18 +1,19 @@
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: argo-hello
+  name: hello-world
   labels:
-    app: argo-hello
+    app: hello
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: argo-hello
+      app: hello
   template:
     metadata:
       labels:
-        app: argo-hello
+        app: hello
     spec:
       containers:
         - name: nginx
@@ -33,3 +34,37 @@ spec:
       maxSurge: 25%
   revisionHistoryLimit: 10
   progressDeadlineSeconds: 600
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+spec:
+  selector:
+    app: hello
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: heello
+  namespace: my-argocd-operator
+spec:
+  rules:
+    - host: hello.10.0.0.8.nip.io 
+      http:
+        paths:
+        - backend:
+            serviceName: hello-service
+            servicePort: 80
+          path: /
+
+
+---
