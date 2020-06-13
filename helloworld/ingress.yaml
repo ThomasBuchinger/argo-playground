@@ -5,11 +5,21 @@ metadata:
   name: hello
 spec:
   rules:
-    - host: hello.10.0.0.8.nip.io 
+    - host: hello.10.0.0.21.nip.io 
       http:
         paths:
-        - backend:
+        - path: /
+          backend:
             serviceName: hello-service
             servicePort: 80
-          path: /
+          
+  rules:
+    - host: hello.kube.buc.local
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: hello-service
+            servicePort: 80
+          
 
