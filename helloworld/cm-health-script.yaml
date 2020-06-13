@@ -18,10 +18,10 @@ data:
       sleep 60
     done
   health_000_Up: echo Up
-  health_001_Ingress: curl -s -o /dev/null -w "%{http_code}" http://hello.10.0.0.8.nip.io
+  health_001_Ingress: curl -s -o /dev/null -w "%{http_code}" http://hello.kube.buc.local
   health_002_Dashboard: |
-    echo "Kube Dashboard: $(curl -s -o /dev/null -w \"%{http_code}\" -k https://10.0.0.8.nip.io:30037) <br>"
-    echo "OKD Console:    $(curl -s -o /dev/null -w \"%{http_code}\" http://10.0.0.8.nip.io:30036) <br>"
-  health_003_Argo: curl -s -o /dev/null -w "%{http_code}" http://argocd.10.0.0.8.nip.io
+    echo "Kube Dashboard: $(curl -s -o /dev/null -w \"%{http_code}\" -k https://kube.buc.local:30037) <br>"
+    echo "OKD Console:    $(curl -s -o /dev/null -w \"%{http_code}\" http://kube.buc.local:30036) <br>"
+  health_003_Argo: curl -s -o /dev/null -w "%{http_code}" http://argocd.kube.buc.local
 
     
