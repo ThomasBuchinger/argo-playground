@@ -10,12 +10,18 @@ spec:
     namespace: monitor
     verbose_mode: '4'
     view_only_mode: false
+    inrgess_enabled: false
   external_services:
     grafana:
-      url: 'loki-stack-grafana:80'
+      enabled: true
+      in_cluster_url: 'http://loki-stack-grafana:80'
     prometheus:
-      url: 'loki-stack-prometheus-server:80'
+      enabled: true
+      in_cluster_url: 'http://loki-stack-prometheus-server:80'
     tracing:
-      url: 'jaeger-query:16686'
+      enabled: true
+      in_cluster_url: 'http://jaeger-query:16686'
   server:
-    web_root: /mykiali
+    web_root: /
+  auth:
+    strategy: anonymous
