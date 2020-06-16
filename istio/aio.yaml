@@ -1,0 +1,90 @@
+apiVersion: istio.banzaicloud.io/v1beta1
+kind: Istio
+metadata:
+  name: istio-cluster
+spec:
+  autoInjectionNamespaces:
+    - default
+    - monitor
+    - login
+    - longhorn-system
+    - my-argocd-operator
+    - olm
+    - traefik
+  citadel:
+    image: 'docker.io/istio/citadel:1.1.2'
+    replicaCount: 1
+  defaultPodDisruptionBudget:
+    enabled: true
+  galley:
+    image: 'docker.io/istio/galley:1.1.2'
+    replicaCount: 1
+  gateways:
+    egress:
+      maxReplicas: 5
+      minReplicas: 1
+      replicaCount: 1
+      sds:
+        image: node-agent-k8s
+    ingress:
+      maxReplicas: 5
+      minReplicas: 1
+      replicaCount: 1
+      sds:
+        image: node-agent-k8s
+    k8singress: {}
+  imageHub: docker.io/istio
+  imageTag: 1.1.0
+  includeIPRanges: '*'
+  mixer:
+    image: 'docker.io/istio/mixer:1.1.2'
+    maxReplicas: 5
+    minReplicas: 1
+    replicaCount: 1
+  mtls: false
+  nodeAgent:
+    image: 'docker.io/istio/node-agent-k8s:1.1.2'
+  outboundTrafficPolicy:
+    mode: ALLOW_ANY
+  pilot:
+    image: 'docker.io/istio/pilot:1.1.2'
+    maxReplicas: 5
+    minReplicas: 1
+    replicaCount: 1
+    traceSampling: 1
+  proxy:
+    image: 'docker.io/istio/proxyv2:1.1.2'
+  proxyInit:
+    image: 'docker.io/istio/proxy_init:1.1.2'
+  sds: {}
+  sidecarInjector:
+    image: 'docker.io/istio/sidecar_injector:1.1.2'
+    replicaCount: 1
+    rewriteAppHTTPProbe: true
+  tracing:
+    zipkin:
+      address: 'jaeger-collector:9411'
+  version: 1.1.2
+  
+ ---
+apiVersion: kiali.io/v1alpha1
+kind: Kiali
+metadata:
+  name: kiali
+spec:
+  installation_tag: My Kiali
+  istio_namespace: istio-system
+  deployment:
+    namespace: monitor
+    verbose_mode: '4'
+    view_only_mode: false
+  external_services:
+    grafana:
+      url: 'loki-stack-grafana:80'
+    prometheus:
+      url: 'loki-stack-prometheus-server:80'
+    tracing:
+      url: 'jaeger-query:16686'
+  server:
+    web_root: /mykiali
+
