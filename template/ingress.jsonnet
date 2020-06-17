@@ -7,25 +7,25 @@
     spec:
       rules: [
         {
-          host: std.format("%s.%s", $._config.inrgess.name, $._config.inrgess.domain)
+          host: std.format("%s.%s", $._config.inrgess.name, $._config.inrgess.domain),
           http:
             paths: [
               {
-                path: "/"
+                path: "/",
                 backend:
-                  serviceName: $._config.inrgess.service_name
+                  serviceName: $._config.inrgess.service_name,
                   servicePort: $._config.inrgess.service_port
               }
             ]
         },
         {
-          host: std.format("%s.%s.%s", $._config.inrgess.name, $._config.inrgess.ip, "nip.io")
+          host: std.format("%s.%s.%s", $._config.inrgess.name, $._config.inrgess.ip, "nip.io"),
           http:
             paths: [
               {
-                path: "/"
+                path: "/",
                 backend:
-                  serviceName: $._config.inrgess.service_name
+                  serviceName: $._config.inrgess.service_name,
                   servicePort: $._config.inrgess.service_port
               }
             ]
