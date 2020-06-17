@@ -8,7 +8,7 @@
     spec: {
       rules: [
         {
-          host: std.format("%s.%s", ($._config.ingress.name, $._config.ingress.domain)),
+          host: std.format("%s.%s", [$._config.ingress.name, $._config.ingress.domain]),
           http: {
             paths: [
               {
@@ -22,7 +22,7 @@
           }
         },
         {
-          host: std.format("%s.%s.%s", ($._config.ingress.name, $._config.ingress.ip, "nip.io")),
+          host: std.format("%s.%s.%s", [$._config.ingress.name, $._config.ingress.ip, "nip.io"]),
           http: {
             paths: [
               {
