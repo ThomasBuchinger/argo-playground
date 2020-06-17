@@ -1,9 +1,7 @@
 {
-  // DO NOT use the root level here.
-  // Include the grafana subkey, otherwise $ won't work.
   ingress: {
-    apiVersion: networking.k8s.io/v1beta1
-    kind: Ingress
+    apiVersion: "networking.k8s.io/v1beta1",
+    kind: "Ingress",
     metadata:
       name: $._config.inrgess.name
     spec:
