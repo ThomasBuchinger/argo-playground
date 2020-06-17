@@ -13,9 +13,10 @@
             paths: [
               {
                 path: "/",
-                backend:
+                backend: {
                   serviceName: $._config.inrgess.service_name,
                   servicePort: $._config.inrgess.service_port
+                }
               }
             ]
           }
@@ -26,9 +27,10 @@
             paths: [
               {
                 path: "/",
-                backend:
+                backend: {
                   serviceName: $._config.inrgess.service_name,
                   servicePort: $._config.inrgess.service_port
+                }
               }
             ]
           }
