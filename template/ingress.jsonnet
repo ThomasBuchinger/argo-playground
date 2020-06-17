@@ -1,5 +1,5 @@
 {
-  kube:: {
+  _k:: {
     ingress: {
       new(name, domain, ip, service_name, service_port=80): {
         apiVersion: "networking.k8s.io/v1beta1",
