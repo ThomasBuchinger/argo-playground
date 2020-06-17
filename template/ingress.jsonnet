@@ -2,13 +2,14 @@
   ingress: {
     apiVersion: "networking.k8s.io/v1beta1",
     kind: "Ingress",
-    metadata:
+    metadata: {
       name: $._config.inrgess.name
-    spec:
+    },
+    spec: {
       rules: [
         {
           host: std.format("%s.%s", $._config.inrgess.name, $._config.inrgess.domain),
-          http:
+          http: {
             paths: [
               {
                 path: "/",
@@ -17,10 +18,11 @@
                   servicePort: $._config.inrgess.service_port
               }
             ]
+          }
         },
         {
           host: std.format("%s.%s.%s", $._config.inrgess.name, $._config.inrgess.ip, "nip.io"),
-          http:
+          http: {
             paths: [
               {
                 path: "/",
@@ -29,8 +31,9 @@
                   servicePort: $._config.inrgess.service_port
               }
             ]
+          }
         }
-      ]
+      ]      
     }
   }
 }
