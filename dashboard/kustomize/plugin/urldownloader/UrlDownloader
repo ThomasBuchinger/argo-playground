@@ -1,5 +1,7 @@
 #!/bin/bash
 # Skip the config file name argument.
-shift
 
-curl $1
+NAME=$1
+URL=$2
+
+kubectl apply  --dry-run=client -f $2 > "$(name).yaml"
