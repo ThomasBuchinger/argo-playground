@@ -1,0 +1,5 @@
+#!/bin/bash
+# Skip the config file name argument.
+shift
+
+curl $1
