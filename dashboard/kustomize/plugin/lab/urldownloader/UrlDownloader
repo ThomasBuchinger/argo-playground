@@ -1,5 +1,6 @@
-#!/bin/bash
-# Skip the config file name argument.
-shift
+#!/usr/bin/env pthon3
 
-kubectl apply --dry-run=client -o yaml -f  $1
+import urllib3
+http = urllib3.PoolManager()
+r = http.request('GET', 'https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml')
+print(r.data)
