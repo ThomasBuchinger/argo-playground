@@ -4,6 +4,6 @@ kind: Kustomization
 commonLabels:
   app: hello
 resources:
-- service.yaml
+- admin.yaml
 generators:
 - urlGenerator.yaml
