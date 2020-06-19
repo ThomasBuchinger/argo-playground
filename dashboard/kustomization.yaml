@@ -4,7 +4,6 @@ kind: Kustomization
 commonLabels:
   app: hello
 resources:
-- admin-user.yaml
-- admin-role-binding.yaml
+- admin.yaml
 generators:
 - urlGenerator.yaml
