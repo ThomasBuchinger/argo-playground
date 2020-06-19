@@ -5,4 +5,4 @@ commonLabels:
   app: hello
 resources: []
 generators:
-- cmGenerator.yaml
+- urlGenerator.yaml
