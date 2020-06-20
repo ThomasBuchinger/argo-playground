@@ -4,7 +4,7 @@
       apiVersion: "v1",
       kind: "Namespace",
       metadata: {
-        name: name
+        name: name,
         labels: if istio_enabled then { istio-injection: enabled } else {}
       }
     }
