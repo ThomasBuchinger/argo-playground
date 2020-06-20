@@ -5,7 +5,7 @@
       kind: "Namespace",
       metadata: {
         name: name,
-        labels: if istio_enabled then { istio-injection: enabled } else {}
+        labels: if istio_enabled then { "istio-injection": "enabled" } else {}
       }
     }
   }
