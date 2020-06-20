@@ -1,0 +1,5 @@
+apiVersion: lab
+kind: UrlDownloader
+metadata:
+  name: upstream-kube-dashboard
+argsOneLiner: https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
