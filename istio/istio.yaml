@@ -45,7 +45,7 @@ spec:
     maxReplicas: 5
     minReplicas: 1
     replicaCount: 1
-    traceSampling: 1
+    traceSampling: 100
   proxy:
     image: 'docker.io/istio/proxyv2:1.1.2'
   proxyInit:
@@ -57,7 +57,7 @@ spec:
     rewriteAppHTTPProbe: true
   tracing:
     zipkin:
-      address: 'zipkin.istio-system:9411'
+      address: ' jaeger-collector.monitor:9411'
   version: 1.1.2
   
 
