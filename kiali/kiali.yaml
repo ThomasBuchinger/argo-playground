@@ -14,13 +14,10 @@ spec:
   external_services:
     grafana:
       enabled: true
-      in_cluster_url: 'http://loki-stack-grafana:80'
     prometheus:
       enabled: true
-      in_cluster_url: 'http://loki-stack-prometheus-server:80'
     tracing:
       enabled: true
-      in_cluster_url: 'http://jaeger-query:16686'
   server:
     web_root: /
   auth:
