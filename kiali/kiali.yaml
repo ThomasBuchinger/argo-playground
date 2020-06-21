@@ -13,11 +13,12 @@ spec:
     inrgess_enabled: false
   external_services:
     grafana:
-      enabled: true
+      enabled: false
     prometheus:
-      enabled: true
+      enabled: false
     tracing:
       enabled: true
+      in_cluster_url: "http://jaeger-query.monitor:3000"
   server:
     web_root: /
   auth:
