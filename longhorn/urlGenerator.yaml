@@ -1,0 +1,6 @@
+
+apiVersion: lab
+kind: UrlDownloader
+metadata:
+  name: upstream-kube-dashboard
+argsOneLiner: https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
