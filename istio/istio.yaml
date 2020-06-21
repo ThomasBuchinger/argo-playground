@@ -55,9 +55,6 @@ spec:
     image: 'docker.io/istio/sidecar_injector:1.1.2'
     replicaCount: 1
     rewriteAppHTTPProbe: true
-  tracing:
-    zipkin:
-      address: 'jaeger-collector:9411'
   version: 1.1.2
   
 
