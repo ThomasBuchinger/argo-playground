@@ -1,0 +1,80 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-access-users
+data:
+  # buc/changeme
+  users: YnVjOiQxJGJNcll2eEZfJFBiYUZZSkFFZ3V4cGI0NWNkaWFIaS8K
+
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: external-access
+spec:
+  chain:
+    middlewares:
+    - name: ratelimit
+    - name: auth-users
+    - name: compress
+    - name: general-error-site
+    - name: extra-error-site
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: auth-users
+spec:
+  basicAuth:
+    secret: external-access-users
+    removeHeader: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: compress
+spec:
+  compress: {}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: general-error-site
+spec:
+  errors:
+    status:
+      - 500-599
+      - 405-499
+      - "400"
+      - "402"
+    query: /static/error.html
+    service:
+      name: statics
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: extra-error-site
+spec:
+  errors:
+    status:
+      - "401"
+      - "403"
+      - "404"
+    query: /static/{status}.html
+    service:
+      name: statics
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: ratelimit
+spec:
+  rateLimit:
+    average: 10
+    burst: 20

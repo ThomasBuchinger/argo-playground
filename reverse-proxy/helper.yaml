@@ -1,0 +1,99 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: external-access-helper
+  labels:
+    k8s-app: external-access
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: external-access
+  template:
+    metadata:
+      labels:
+        k8s-app: external-access
+    spec:
+      containers:
+        - name: nginx
+          image: 'nginx:alpine'
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: httproot
+              mountPath: /usr/share/nginx/html/static
+            - name: service-account
+              mountPath: /usr/share/nginx/html/cred
+      volumes:
+        - name: httproot
+          configMap:
+            name: static-files
+            defaultMode: 0644
+        - name: service-account
+          secret:
+              secretName: traefik-external-token
+              defaultMode: 0644
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: static-files
+  labels:
+    k8s-app: external-access
+data: 
+  404.html: |
+    <h1> 404 - Not Found </h1>
+  401.html: |
+    <h1> 401 - Unauthorized </h1>
+  403.html: |
+    <h1> 403 - Forbidden </h1>
+  error.html: |
+    <h1> General Error </h1>
+  traefik_opts: >-
+    --global.checknewversion true
+    --api
+    --api.dashboard
+    --ping
+    --log
+    --log.format=json
+    --accesslog
+    --accesslog.filepath=/var/log/traefik_access.log
+
+    --entrypoints.acme
+    --entrypoints.acme.address=8000
+    --entrypoints.traefik
+    --entrypoints.traefik.address=8080
+    --entrypoints.traefik.http
+    --entrypoints.traefik.http.middlewares=auth-users
+    --entrypoints.websecure
+    --entrypoints.websecure.address=8443
+
+    --certificatesresolvers.letsencrypt
+    --certificatesresolvers.letsencrypt.acme.email=foo@bar.baz
+    --certificatesresolvers.letsencrypt.acme.httpchallenge
+    --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=acme
+    
+    --metrics.prometheus
+    --tracing
+    --tracing.servicename=external-access
+    --tracing.jaeger
+    --tracing.jaeger.collector.endpoint=http://jaeger-collector.kube.buc.local:14268/api/traces?format=jaeger.thrift
+
+    --providers.kubernetescrd.endpoint=https://kube.buc.local:6443
+    --providers.kubernetescrd.token=${KUBE_TOKEN}
+    --providers.kubernetescrd.certauthfilepath=ca.crt
+    --providers.kubernetescrd.namespaces=${KUBE_NS}
+    --providers.kubernetescrd.ingressclass=external
