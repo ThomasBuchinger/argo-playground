@@ -97,3 +97,18 @@ data:
     --providers.kubernetescrd.certauthfilepath=ca.crt
     --providers.kubernetescrd.namespaces=${KUBE_NS}
     --providers.kubernetescrd.ingressclass=external
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: statics
+  labels:
+    k8s-app: external-access
+spec:
+  selector:
+    k8s-app: external-access
+  ports:
+    - port: 80
+      targetPort: 80
