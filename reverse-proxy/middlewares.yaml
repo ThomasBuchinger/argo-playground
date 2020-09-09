@@ -52,7 +52,7 @@ spec:
       - "402"
     query: /static/error.html
     service:
-      name: statics
+      name: static-external
       port: 80
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -67,7 +67,7 @@ spec:
       - "404"
     query: /static/{status}.html
     service:
-      name: statics
+      name: static-external
       port: 80
 ---
 apiVersion: traefik.containo.us/v1alpha1
