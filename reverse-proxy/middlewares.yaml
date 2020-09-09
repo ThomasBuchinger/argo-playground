@@ -87,9 +87,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: external
 spec:
-  routes:
   entryPoints:
   - traefik
+  routes:
   - match: (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
     kind: Rule
     services:
