@@ -71,7 +71,7 @@ data:
       acme:
         address: :8000
       traefik:
-        address: :8000
+        address: :8080
         http:
           middlewares: ["auth-users"]
       websecure:
