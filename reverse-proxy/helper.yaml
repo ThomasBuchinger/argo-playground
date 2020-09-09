@@ -78,9 +78,9 @@ data:
         address: :8443
     providers:
       kubernetesCRD:
-        # endpoint:
+        endpoint: URL
         certAuthFilePath: ca.crt
-        # token:
+        token: TOKEN
         disablePassHostHeaders: false
         namespaces: ["traefik"]
         ingressClass: external
