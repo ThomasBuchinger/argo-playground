@@ -107,5 +107,23 @@ metadata:
   labels:
     k8s-app: external-access
 spec:
+  type: ClusterIP
+  selector:
+    k8s-app: external-access
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: static-external
+  labels:
+    k8s-app: external-access
+spec:
   type: ExternalName
   externalName: static.kube.buc.local
+
