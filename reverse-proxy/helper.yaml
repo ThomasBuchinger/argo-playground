@@ -92,7 +92,7 @@ data:
     certificatesResolvers:
       letsencrypt:
         acme:
-          email: foo@bar.baz
+          email: foo@bar.com
           storage: acme.json
           httpChallenge:
             entryPoint: acme
