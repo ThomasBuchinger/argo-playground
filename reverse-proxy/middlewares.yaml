@@ -78,3 +78,19 @@ spec:
   rateLimit:
     average: 10
     burst: 20
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+spec:
+  routes:
+  - match: (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService
+    middlewares:
+      - name: auth-users
+    
