@@ -99,7 +99,6 @@ data:
           httpChallenge:
             entryPoint: acme
 
-
 ---
 apiVersion: v1
 kind: Service
@@ -108,9 +107,5 @@ metadata:
   labels:
     k8s-app: external-access
 spec:
-  selector:
-    k8s-app: external-access
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
+  type: ExternalName
+  externalName: static.kube.buc.local
