@@ -62,41 +62,42 @@ data:
     <h1> 403 - Forbidden </h1>
   error.html: |
     <h1> General Error </h1>
-  traefik_opts: >-
-    --global.checknewversion true
-    --api
-    --api.dashboard
-    --ping
-    --log
-    --log.format=json
-    --accesslog
-    --accesslog.filepath=/var/log/traefik_access.log
-
-    --entrypoints.acme
-    --entrypoints.acme.address=8000
-    --entrypoints.traefik
-    --entrypoints.traefik.address=8080
-    --entrypoints.traefik.http
-    --entrypoints.traefik.http.middlewares=auth-users
-    --entrypoints.websecure
-    --entrypoints.websecure.address=8443
-
-    --certificatesresolvers.letsencrypt
-    --certificatesresolvers.letsencrypt.acme.email=foo@bar.baz
-    --certificatesresolvers.letsencrypt.acme.httpchallenge
-    --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=acme
-    
-    --metrics.prometheus
-    --tracing
-    --tracing.servicename=external-access
-    --tracing.jaeger
-    --tracing.jaeger.collector.endpoint=http://jaeger-collector.kube.buc.local:14268/api/traces?format=jaeger.thrift
-
-    --providers.kubernetescrd.endpoint=https://kube.buc.local:6443
-    --providers.kubernetescrd.token=${KUBE_TOKEN}
-    --providers.kubernetescrd.certauthfilepath=ca.crt
-    --providers.kubernetescrd.namespaces=${KUBE_NS}
-    --providers.kubernetescrd.ingressclass=external
+  traefik.yaml: |
+    ---
+    global:
+      checkNewVersion: true
+      sendAnonymousUsage: false
+    entryPoints:
+      acme:
+        address: :8000
+      traefik:
+        address: :8000
+        http:
+          middlewares: ["auth-users"]
+      websecure:
+        address: :8443
+    providers:
+      kubernetesCRD:
+        # endpoint:
+        certAuthFilePath: ca.crt
+        # token:
+        disablePassHostHeaders: false
+        namespaces: ["traefik"]
+        ingressClass: external
+    api:
+      dashboard: true
+    metrics:
+      prometheus: {}
+    log: {}
+    accessLog:
+      filePath: /var/log/traefik_access.log
+    certificatesResolvers:
+      letsencrypt:
+        acme:
+          email: foo@bar.baz
+          storage: acme.json
+          httpChallenge:
+            entryPoint: acme
 
 
 ---
@@ -110,5 +111,6 @@ spec:
   selector:
     k8s-app: external-access
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 80
