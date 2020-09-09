@@ -84,15 +84,17 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: traefik-dashboard
+  annotations:
+    kubernetes.io/ingress.class: external
 spec:
   routes:
+  entryPoints:
+  - traefik
   - match: (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
     kind: Rule
     services:
     - name: api@internal
       kind: TraefikService
-    entryPoints:
-    - traefik
     middlewares:
       - name: auth-users
     
