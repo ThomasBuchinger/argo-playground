@@ -91,6 +91,8 @@ spec:
     services:
     - name: api@internal
       kind: TraefikService
+    entryPoints:
+    - traefik
     middlewares:
       - name: auth-users
     
