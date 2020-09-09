@@ -72,8 +72,6 @@ data:
         address: :8000
       traefik:
         address: :8080
-        http:
-          middlewares: ["auth-users"]
       websecure:
         address: :8443
     providers:
