@@ -1,0 +1,67 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: external-access
+  namespace: my-argocd-operator
+spec:
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: "*"
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist: []
+  orphanedResources:
+    warn: false
+
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: z-access-app-console
+  namespace: my-argocd-operator
+spec:
+  destination:
+    namespace: my-argocd-operator
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
+    targetRevision: 'rev-proxy'
+    path: "reverse-proxy/console"
+  directory: {}
+  project: external-access
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: z-access-app-argocd
+  namespace: my-argocd-operator
+spec:
+  destination:
+    namespace: my-argocd-operator
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
+    targetRevision: 'rev-proxy'
+    path: "reverse-proxy/argocd"
+  directory: {}
+  project: external-access
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: z-access-app-foreman
+  namespace: my-argocd-operator
+spec:
+  destination:
+    namespace: my-argocd-operator
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
+    targetRevision: 'rev-proxy'
+    path: "reverse-proxy/foreman"
+  directory: {}
+  project: external-access
