@@ -3,11 +3,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: argocd
+  name: console
   namespace: traefik
 spec:
   type: ExternalName
-  externalName: argocd.kube.buc.local
+  externalName: kube.buc.local
 
 
 ---
@@ -23,12 +23,12 @@ spec:
     - websecure
   routes:
   - kind: Rule
-    match: Host(`argocd.public.buc.ddns.info`)
+    match: Host(`console.public.buc.ddns.info`)
     middlewares:
     - name: external-access
     services:
     - name: argocd
       passHostHeader: false
-      port: 80
+      port: 30056
   tls:
     certResolver: letsencrypt
