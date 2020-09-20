@@ -29,6 +29,6 @@ spec:
     services:
     - name: console
       passHostHeader: false
-      port: 30056
+      port: 30036
   tls:
     certResolver: letsencrypt
