@@ -13,10 +13,6 @@ spec:
   clusterResourceWhitelist: []
   orphanedResources:
     warn: false
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -24,6 +20,8 @@ kind: Application
 metadata:
   name: z-access-app-console
   namespace: my-argocd-operator
+  labels:
+    argo-project: external-access
 spec:
   destination:
     namespace: my-argocd-operator
@@ -41,6 +39,8 @@ kind: Application
 metadata:
   name: z-access-app-argocd
   namespace: my-argocd-operator
+  labels:
+    argo-project: external-access
 spec:
   destination:
     namespace: my-argocd-operator
@@ -58,6 +58,8 @@ kind: Application
 metadata:
   name: z-access-app-foreman
   namespace: my-argocd-operator
+  labels:
+    argo-project: external-access
 spec:
   destination:
     namespace: my-argocd-operator
