@@ -7,7 +7,7 @@ metadata:
   namespace: traefik
 spec:
   type: ExternalName
-  externalName: foreman.kube.buc.local
+  externalName: foreman.buc.local
 
 
 ---
