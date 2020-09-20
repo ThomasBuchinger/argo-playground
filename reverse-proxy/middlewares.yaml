@@ -16,7 +16,6 @@ metadata:
 spec:
   chain:
     middlewares:
-    - name: ratelimit
     - name: auth-users
     - name: compress
     - name: general-error-site
@@ -69,15 +68,6 @@ spec:
     service:
       name: static-external
       port: 80
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: ratelimit
-spec:
-  rateLimit:
-    average: 10
-    burst: 20
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
