@@ -39,6 +39,8 @@ spec:
     - name: traefik-forward-auth
       passHostHeader: false
       port: 4181
+    middlewares:
+      - name: traefik-forward-auth
   tls:
     certResolver: letsencrypt
 
