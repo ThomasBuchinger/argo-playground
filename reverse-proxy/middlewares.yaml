@@ -17,10 +17,8 @@ spec:
   chain:
     middlewares:
     - name: sec-headers
-    - name: auth-users
+    - name: traefik-forward-auth
     - name: compress
-    - name: general-error-site
-    - name: extra-error-site
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -53,37 +51,37 @@ spec:
     #stsIncludeSubdomains: true
     #stsPreload: true
     #stsSeconds: 31536000
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: general-error-site
-spec:
-  errors:
-    status:
-      - 500-599
-      - 405-499
-      - "400"
-      - "402"
-    query: /static/error.html
-    service:
-      name: static-external
-      port: 80
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: extra-error-site
-spec:
-  errors:
-    status:
-      - "401"
-      - "403"
-      - "404"
-    query: /static/{status}.html
-    service:
-      name: static-external
-      port: 80
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: general-error-site
+# spec:
+#   errors:
+#     status:
+#       - 500-599
+#       - 405-499
+#       - "400"
+#       - "402"
+#     query: /static/error.html
+#     service:
+#       name: static-external
+#       port: 80
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: extra-error-site
+# spec:
+#   errors:
+#     status:
+#       - "401"
+#       - "403"
+#       - "404"
+#     query: /static/{status}.html
+#     service:
+#       name: static-external
+#       port: 80
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
