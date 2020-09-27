@@ -13,7 +13,7 @@
         match_type="Host",
         pass_host_header=false,
         entrypoints=["websecure"],
-        
+
         annotations={},
         labels={},
         namespace=null
@@ -34,7 +34,7 @@
             match:  match_type+"(`" + rule +"`)",
             services: [
               {
-                name: service_name,
+                name: std.strReplace(fqdn, ".", "-"),
                 passHostHeader: pass_host_header
               }
               + ( if std.isString(scheme)       then { scheme: scheme     } else {})
