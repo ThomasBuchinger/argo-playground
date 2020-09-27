@@ -35,10 +35,10 @@
             services: [
               {
                 name: std.strReplace(service_name, ".", "-"),
+                port: service_port,
                 passHostHeader: pass_host_header
               }
-              + ( if std.isString(scheme)       then { scheme: scheme     } else {})
-              + ( if std.isString(service_port) then { port: service_port } else {}),
+              + ( if std.isString(scheme)       then { scheme: scheme     } else {}),
             ],
             middlewares: [ { name: middleware }],
             tls: {
