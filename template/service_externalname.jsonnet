@@ -4,7 +4,7 @@
       apiVersion: "v1",
       kind: "Service",
       metadata: {
-        name: fqdn,
+        name: std.strReplace(fqdn, ".", "-"),
         annotations: annotations
       } + ( if std.isString(namespace) then { namespace: namespace } else {}),
       spec: {
