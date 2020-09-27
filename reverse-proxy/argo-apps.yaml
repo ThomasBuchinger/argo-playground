@@ -102,7 +102,7 @@ spec:
           - name: public_url
             value: foreman.public.buc.ddns.info
           - name: internal_url
-            value: 10.0.0.5.nip.io
+            value: foreman-10.0.0.5.nip.io
           - name: internal_protocol
             value: "https"
           - name: traefik_middleware
