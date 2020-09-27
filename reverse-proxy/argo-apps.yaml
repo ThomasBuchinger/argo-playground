@@ -30,22 +30,21 @@ spec:
     repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
     targetRevision: 'rev-proxy'
     path: "reverse-proxy/ingress"
-  directory:
-    recursive: true
-    jsonnet:
-      extVars:
-        - name: public_url
-          value: console.public.buc.ddns.info
-        - name: internal_url
-          value: kube.buc.local
-        - name: internal_port
-          value: "30036"
-        - name: traefik_middleware
-          value: external-access
-        - name: traefik_certprovider
-          value: letsencrypt
-        - name: ingress_class
-          value: external
+    directory:
+      jsonnet:
+        extVars:
+          - name: public_url
+            value: console.public.buc.ddns.info
+          - name: internal_url
+            value: kube.buc.local
+          - name: internal_port
+            value: "30036"
+          - name: traefik_middleware
+            value: external-access
+          - name: traefik_certprovider
+            value: letsencrypt
+          - name: ingress_class
+            value: external
   project: external-access
 
 ---
@@ -64,20 +63,20 @@ spec:
     repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
     targetRevision: 'rev-proxy'
     path: "reverse-proxy/ingress"
-  directory:
-    recursive: true
-    jsonnet:
-      extVars:
-        - name: public_url
-          value: argocd.public.buc.ddns.info
-        - name: internal_url
-          value: argocd.kube.buc.local
-        - name: traefik_middleware
-          value: external-access
-        - name: traefik_certprovider
-          value: letsencrypt
-        - name: ingress_class
-          value: external
+    directory:
+      recursive: true
+      jsonnet:
+        extVars:
+          - name: public_url
+            value: argocd.public.buc.ddns.info
+          - name: internal_url
+            value: argocd.kube.buc.local
+          - name: traefik_middleware
+            value: external-access
+          - name: traefik_certprovider
+            value: letsencrypt
+          - name: ingress_class
+            value: external
   project: external-access
 
 ---
@@ -96,20 +95,20 @@ spec:
     repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
     targetRevision: 'rev-proxy'
     path: "reverse-proxy/ingress"
-  directory:
-    recursive: true
-    jsonnet:
-      extVars:
-        - name: public_url
-          value: console.public.buc.ddns.info
-        - name: internal_url
-          value: kube.buc.local
-        - name: internal_protocol
-          value: "https"
-        - name: traefik_middleware
-          value: external-access
-        - name: traefik_certprovider
-          value: letsencrypt
-        - name: ingress_class
-          value: external
+    directory:
+      recursive: true
+      jsonnet:
+        extVars:
+          - name: public_url
+            value: console.public.buc.ddns.info
+          - name: internal_url
+            value: kube.buc.local
+          - name: internal_protocol
+            value: "https"
+          - name: traefik_middleware
+            value: external-access
+          - name: traefik_certprovider
+            value: letsencrypt
+          - name: ingress_class
+            value: external
   project: external-access

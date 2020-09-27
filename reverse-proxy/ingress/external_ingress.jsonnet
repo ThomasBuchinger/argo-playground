@@ -20,13 +20,3 @@ std.manifestYamlStream(
     )
   ]
 )
-
-# Kube.TraefikRoute.new(
-#   "public_url",
-#   "public_url",
-#   "internal_url",
-#   "traefik_middleware",
-#   "traefik_certprovider",
-#   ingress_class="ingress_class",
-#   scheme= "http"
-# )
