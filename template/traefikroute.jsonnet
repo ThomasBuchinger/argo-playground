@@ -40,12 +40,16 @@
               }
               + ( if std.isString(scheme)       then { scheme: scheme     } else {}),
             ],
-            middlewares: [ { name: middleware }],
-            tls: {
-              certResolver: cert_resolver
-            }
+            middlewares: [
+              {
+                name: middleware
+              }
+            ]
           }
         ]
+        tls: {
+          certResolver: cert_resolver
+        }
 
       }
     }
