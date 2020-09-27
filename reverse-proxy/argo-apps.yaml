@@ -103,6 +103,8 @@ spec:
             value: foreman.public.buc.ddns.info
           - name: internal_url
             value: foreman-10.0.0.5.nip.io
+          - name: internal_port
+            value: "443"
           - name: internal_protocol
             value: "https"
           - name: traefik_middleware
