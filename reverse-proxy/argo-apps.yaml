@@ -24,7 +24,7 @@ metadata:
     argo-project: external-access
 spec:
   destination:
-    namespace: my-argocd-operator
+    namespace: traefik
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
@@ -57,7 +57,7 @@ metadata:
     argo-project: external-access
 spec:
   destination:
-    namespace: my-argocd-operator
+    namespace: traefik
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
@@ -89,7 +89,7 @@ metadata:
     argo-project: external-access
 spec:
   destination:
-    namespace: my-argocd-operator
+    namespace: traefik
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
