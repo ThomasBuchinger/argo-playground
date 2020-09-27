@@ -1,18 +1,29 @@
 local Kube= (import "../../template/service_externalname.jsonnet") + (import "../../template/traefikroute.jsonnet");
 
+function(
+  public_url,
+  internal_url,
+  traefik_middleware,
+  traefik_certprovider,
+
+  ingress_class=null,
+  internal_port=null,
+  internal_protocol=null
+)
+
 std.manifestYamlStream(
   [
-    Kube.Service.new(std.extVar("internal_url")),
+    Kube.Service.new(internal_url),
     Kube.TraefikRoute.new(
-      std.extVar("public_url"),
-      std.extVar("public_url"),
-      std.extVar("internal_url"),
-      std.extVar("traefik_middleware"),
-      std.extVar("traefik_certprovider"),
-      ingress_class=std.extVar("ingress_class"),
+      public_url,
+      public_url,
+      internal_url,
+      traefik_middleware,
+      traefik_certprovider,
 
-      service_port=std.extVar("internal_port"),
-      scheme=std.extVar("internal_protocol"),
+      ingress_class=ingress_class,
+      service_port=internal_port,
+      scheme=internal_protocol,
       pass_host_header=false,
       entrypoints=["websecure"],
       annotations={},
@@ -20,3 +31,5 @@ std.manifestYamlStream(
     )
   ]
 )
+    
+

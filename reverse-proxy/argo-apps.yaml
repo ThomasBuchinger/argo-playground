@@ -32,7 +32,7 @@ spec:
     path: "reverse-proxy/ingress"
     directory:
       jsonnet:
-        extVars:
+        tlas:
           - name: public_url
             value: console.public.buc.ddns.info
           - name: internal_url
@@ -66,7 +66,7 @@ spec:
     directory:
       recursive: true
       jsonnet:
-        extVars:
+        tlas:
           - name: public_url
             value: argocd.public.buc.ddns.info
           - name: internal_url
@@ -98,7 +98,7 @@ spec:
     directory:
       recursive: true
       jsonnet:
-        extVars:
+        tlas:
           - name: public_url
             value: console.public.buc.ddns.info
           - name: internal_url
