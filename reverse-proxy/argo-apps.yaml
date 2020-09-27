@@ -31,6 +31,7 @@ spec:
     targetRevision: 'rev-proxy'
     path: "reverse-proxy/ingress"
   directory:
+    recursive: true
     jsonnet:
       extVars:
         - name: public_url
@@ -62,8 +63,9 @@ spec:
   source:
     repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
     targetRevision: 'rev-proxy'
-    path: "reverse-proxy/argocd"
+    path: "reverse-proxy/ingress"
   directory:
+    recursive: true
     jsonnet:
       extVars:
         - name: public_url
@@ -93,8 +95,9 @@ spec:
   source:
     repoURL: 'https://github.com/ThomasBuchinger/argo-playground.git'
     targetRevision: 'rev-proxy'
-    path: "reverse-proxy/foreman"
+    path: "reverse-proxy/ingress"
   directory:
+    recursive: true
     jsonnet:
       extVars:
         - name: public_url
