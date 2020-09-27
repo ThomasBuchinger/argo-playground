@@ -46,7 +46,7 @@
               }
             ]
           }
-        ]
+        ],
         tls: {
           certResolver: cert_resolver
         }
