@@ -7,7 +7,7 @@ function(
   traefik_certprovider,
 
   ingress_class=null,
-  internal_port=null,
+  internal_port=80,
   internal_protocol=null,
   namespace="traefik"
 )
