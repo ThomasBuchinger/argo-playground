@@ -17,8 +17,8 @@
         labels={}
       ): {
       
-      apiVersion: "v1",
-      kind: "Namespace",
+      apiVersion: "traefik.containo.us/v1alpha1",
+      kind: "IngressRoute",
       metadata: {
         name: name + "-route",
         labels: labels,
