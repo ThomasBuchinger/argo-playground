@@ -82,6 +82,13 @@ data:
         disablePassHostHeaders: false
         namespaces: ["traefik"]
         ingressClass: external
+      kubernetesIngress:
+        endpoint: URL
+        certAuthFilePath: ca.crt
+        token: TOKEN
+        disablePassHostHeaders: true
+        namespaces: ["traefik"]
+        ingressClass: external
     api:
       dashboard: true
     metrics:
