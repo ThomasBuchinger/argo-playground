@@ -8,7 +8,7 @@ function(
 
   ingress_class=null,
   internal_port=null,
-  internal_protocol=null
+  internal_protocol=null,
   namespace="traefik"
 )
 
