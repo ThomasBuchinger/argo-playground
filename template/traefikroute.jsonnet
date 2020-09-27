@@ -35,7 +35,7 @@
             services: [
               {
                 name: std.strReplace(service_name, ".", "-"),
-                port: service_port,
+                port: if std.isNumber(service_port) then service_port else std.parseInt(service_port),
                 passHostHeader: pass_host_header
               }
               + ( if std.isString(scheme)       then { scheme: scheme     } else {}),
