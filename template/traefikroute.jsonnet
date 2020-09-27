@@ -34,7 +34,7 @@
             match:  match_type+"(`" + rule +"`)",
             services: [
               {
-                name: std.strReplace(fqdn, ".", "-"),
+                name: std.strReplace(service_name, ".", "-"),
                 passHostHeader: pass_host_header
               }
               + ( if std.isString(scheme)       then { scheme: scheme     } else {})
