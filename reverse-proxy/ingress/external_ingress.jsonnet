@@ -11,25 +11,24 @@ function(
   internal_protocol=null
 )
 
-std.manifestYamlStream(
-  [
-    Kube.Service.new(internal_url),
-    Kube.TraefikRoute.new(
-      public_url,
-      public_url,
-      internal_url,
-      traefik_middleware,
-      traefik_certprovider,
+[
+  Kube.Service.new(internal_url),
+  Kube.TraefikRoute.new(
+    public_url,
+    public_url,
+    internal_url,
+    traefik_middleware,
+    traefik_certprovider,
 
-      ingress_class=ingress_class,
-      service_port=internal_port,
-      scheme=internal_protocol,
-      pass_host_header=false,
-      entrypoints=["websecure"],
-      annotations={},
-      labels={}
-    )
-  ]
-)
+    ingress_class=ingress_class,
+    service_port=internal_port,
+    scheme=internal_protocol,
+    pass_host_header=false,
+    entrypoints=["websecure"],
+    annotations={},
+    labels={}
+  )
+]
+
     
 
