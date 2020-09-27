@@ -9,6 +9,7 @@ function(
   ingress_class=null,
   internal_port=null,
   internal_protocol=null
+  namespace="traefik"
 )
 
 [
@@ -26,7 +27,8 @@ function(
     pass_host_header=false,
     entrypoints=["websecure"],
     annotations={},
-    labels={}
+    labels={},
+    namespace=namespace
   )
 ]
 

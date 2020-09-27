@@ -13,8 +13,10 @@
         match_type="Host",
         pass_host_header=false,
         entrypoints=["websecure"],
+        
         annotations={},
-        labels={}
+        labels={},
+        namespace=null
       ): {
       
       apiVersion: "traefik.containo.us/v1alpha1",
@@ -23,7 +25,7 @@
         name: name + "-route",
         labels: labels,
         annotations: annotations + ( if std.isString(ingress_class) then { "kubernetes.io/ingress.class": ingress_class } else {}),
-      },
+      } + ( if std.isString(namespace) then { namespace: namespace } else {}),
       spec: {
         entryPoints: entrypoints,
         routes: [
