@@ -67,6 +67,8 @@ data:
     global:
       checkNewVersion: true
       sendAnonymousUsage: false
+    serversTransport:
+      insecureSkipVerify: true
     entryPoints:
       acme:
         address: :8000
@@ -88,7 +90,7 @@ data:
       prometheus: {}
     log: {}
     accessLog:
-      filePath: /var/log/traefik_access.log
+      filePath: /var/log/traefik/access.log
     certificatesResolvers:
       letsencrypt:
         acme:
@@ -112,7 +114,6 @@ spec:
     - name: http
       port: 80
       targetPort: 80
-
 
 ---
 apiVersion: v1

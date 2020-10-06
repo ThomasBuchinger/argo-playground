@@ -83,7 +83,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: z-access-app-foreman
+  name: z-access-app-kvm
   namespace: my-argocd-operator
   labels:
     argo-project: external-access
@@ -102,7 +102,7 @@ spec:
           - name: public_url
             value: kvm.public.buc.ddns.info
           - name: internal_url
-            value: kvm-10.0.0.3.nip.io
+            value: buc-kvm.buc.local
           - name: internal_port
             value: "9090"
           - name: internal_protocol
