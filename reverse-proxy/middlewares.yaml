@@ -4,9 +4,8 @@ kind: Secret
 metadata:
   name: external-access-users
 data:
-  # buc/changeme
-  users: YnVjOiQxJGJNcll2eEZfJFBiYUZZSkFFZ3V4cGI0NWNkaWFIaS8K
-
+  # admin/admin
+  users: "{{ 'admin:$apr1$adkdUll5$6OcqMz9DXhIRG8pLItoWd/' | b64encode }}"
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
