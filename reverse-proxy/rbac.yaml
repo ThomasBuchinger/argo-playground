@@ -1,0 +1,64 @@
+
+# === Auth Config ==============================================
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: traefik-external
+
+---
+# Used to mount the traefik-external credentials
+kind: Secret
+apiVersion: v1
+metadata:
+  name: traefik-external-token
+  annotations:
+    kubernetes.io/service-account.name: traefik-external
+type: kubernetes.io/service-account-token
+
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-ingressroute-cr
+rules:
+- apiGroups:
+    - traefik.containo.us
+  resources:
+    - "*"
+  verbs:
+    - get
+    - watch
+    - list
+- apiGroups:
+    - extensions
+  resources:
+    - ingresses
+  verbs:
+    - get
+    - watch
+    - list
+- apiGroups:
+  - ""
+  resources:
+    - services
+    - secrets
+    - endpoints
+  verbs:
+    - get
+    - watch
+    - list
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-traefik-config
+subjects:
+- kind: ServiceAccount
+  name: traefik-external
+  namespace: traefik
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-ingressroute-cr
+
