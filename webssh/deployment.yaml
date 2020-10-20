@@ -75,7 +75,8 @@ spec:
   selector:
     app: ssh-web-console
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 2222
   type: ClusterIP
