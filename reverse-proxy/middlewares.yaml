@@ -1,13 +1,4 @@
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: external-access-users
-data:
-  # admin/admin
-  users: "{{ 'admin:$apr1$adkdUll5$6OcqMz9DXhIRG8pLItoWd/' | b64encode }}"
-
----
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
