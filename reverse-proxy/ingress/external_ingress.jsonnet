@@ -7,7 +7,7 @@ function(
   traefik_certprovider,
 
   ingress_class=null,
-  pass_host_reader=false,
+  pass_host_header=false,
   internal_port=80,
   internal_protocol=null,
   namespace="traefik"
@@ -25,7 +25,7 @@ function(
     ingress_class=ingress_class,
     service_port=internal_port,
     scheme=internal_protocol,
-    pass_host_header=pass_host_reader,
+    pass_host_header=(pass_host_header == 't'),
     entrypoints=["websecure"],
     annotations={},
     labels={},
