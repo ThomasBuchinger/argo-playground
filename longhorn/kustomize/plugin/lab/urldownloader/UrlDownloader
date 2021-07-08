@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import urllib3
+import yaml
+import sys
+res_name = sys.argv[1]
+res_url = sys.argv[2]
+
+http = urllib3.PoolManager()
+r = http.request('GET', res_url)
+
+out = r.data.decode('unicode_escape').split('---')
+out = list(map(lambda x: yaml.dump(yaml.safe_load(x)), out))
+
+print("\n---\n".join(out))

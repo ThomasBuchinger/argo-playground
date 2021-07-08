@@ -1,0 +1,6 @@
+
+apiVersion: lab
+kind: UrlDownloader
+metadata:
+  name: upstream-longhorn-deployment
+argsOneLiner: https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
